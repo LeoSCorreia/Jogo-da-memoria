@@ -6,16 +6,13 @@ const ICON = 'icon';
 startGame();
 
 function startGame() {
-    cards = createCardsFromTechs(techs);
-    shuffleCards(cards);
-
-    initializeCards(cards);
+    initializeCards(game.createCardsFromTechs());
 }
 
 function initializeCards(cards) {
     let gameBoard = document.getElementById('gameBoard');
 
-    cards.forEach((card) => {
+    game.cards.forEach((card) => {
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add(CARD);
@@ -45,21 +42,6 @@ function createCardFace(face, card, element) {
         cardElementFace.innerHTML = '&lt/&gt';
     }
     element.appendChild(cardElementFace);
-}
-
-function shuffleCards(cards) {
-    let curruntIndex = cards.length;
-    let randomIndex = 0;
-
-    while (curruntIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * curruntIndex);
-        curruntIndex--;
-
-        [cards[randomIndex], cards[curruntIndex]] = [
-            cards[curruntIndex],
-            cards[randomIndex],
-        ];
-    }
 }
 
 function flipCard() {
