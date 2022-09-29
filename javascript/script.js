@@ -48,17 +48,18 @@ function flipCard() {
   if (game.setCard(this.id)) {
     this.classList.add("flip");
   }
-
-  if (game.checkMatch()) {
-    game.clearCards();
-  } else {
-    setTimeout(() => {
-      let firstCardView = document.getElementById(game.firstCard.id);
-      let secondCardView = document.getElementById(game.secondCard.id);
-
-      firstCardView.classList.remove("flip");
-      secondCardView.classList.remove("flip");
+  if (game.secondCard) {
+    if (game.checkMatch()) {
       game.clearCards();
-    }, 1000);
+    } else {
+      setTimeout(() => {
+        let firstCardView = document.getElementById(game.firstCard.id);
+        let secondCardView = document.getElementById(game.secondCard.id);
+
+        firstCardView.classList.remove("flip");
+        secondCardView.classList.remove("flip");
+        game.unflipCards();
+      }, 1000);
+    }
   }
 }
